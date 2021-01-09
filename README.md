@@ -1,2 +1,2 @@
 # superSOM
-CyTOF sample gating supervised Self Organizing Maps
+## CyTOF sample gating using supervised Self Organizing Maps
