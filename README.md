@@ -111,14 +111,20 @@ In addition to using all probes for clustering, superSOM also clusters the major
 
 ![strategy](https://user-images.githubusercontent.com/46689973/104108921-8c1c8100-527d-11eb-80e4-19665af258e3.png)
 
-To gate/label sub-populations of cels, superSOM simply repeats the above procedure using the newly-labeled parent cell populations for the query sample(s) and feature-sets defined by the gating hierarchy. For cells defined by quadrant gates, we also use the collection of all gate boundaries in the training data to define `Regions of Interest` to define the paretn cell population more tightly, as illustrated in the example below:
+To gate/label sub-populations of cells, superSOM simply repeats the above procedure using the newly-labeled parent cell populations for the query sample(s) and feature-sets defined by the gating hierarchy. For cells defined by quadrant gates, we also use the collection of all gate boundaries in the training data to define `Regions of Interest` to define the parent cell populations more tightly, as illustrated in the example below:
 
 ![ROIs](https://user-images.githubusercontent.com/46689973/104108926-92126200-527d-11eb-92ab-5be7293bcf31.png)
 
-After superSOM has perfomred all the different typers of clustering/labeling described above, the use can select the particular combination of inputs and parameters that lead to the best (application-specific) precision and recall values.
+After superSOM has perfomred all the different types of clustering/labeling described above, the user can select the particular combination of inputs and parameters that lead to the best (application-specific) precision and recall values for each cell population.
 
 ### Post-processing
 
 After completion of SOM-clustering and label transfer, superSOM performs a post-processing step in which we adjust the boundaries of the clustering based gates to more closely resemble those defined by rectangular gates in FlowJo, as in the example below:
 
 ![postProcessing](https://user-images.githubusercontent.com/46689973/104108928-976fac80-527d-11eb-8fbc-3c0a081beb8a.png)
+
+### How to use superSOM
+
+superSOM describes an approach to automated gating developed for a particular use-case. It is not a general-purpose R/Bioc package. The code in this repository is intended as an example implementation of the underlying idea and can be used as a strating point for future applications.
+
+
