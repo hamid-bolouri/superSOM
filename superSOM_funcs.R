@@ -2,7 +2,7 @@
 
 
 #-------------------------------------------------------------------------------#
-#				Convenience function to de-clutter code 						#
+#				Convenience function to de-clutter code 	#
 #-------------------------------------------------------------------------------#
 
 getPredictions <- function(subSCE, popLbls, purity, pops2ClustL, iGrp) {
@@ -46,7 +46,7 @@ getPredictions <- function(subSCE, popLbls, purity, pops2ClustL, iGrp) {
 
 
 #-------------------------------------------------------------------------------#
-#				Featured-selected prediction of major populations				#
+#		Featured-selected prediction of major populations		#
 #-------------------------------------------------------------------------------#
 
 predMP.fs <- function(sce) {
@@ -130,7 +130,7 @@ predMP.fs <- function(sce) {
 
 
 #-------------------------------------------------------------------------------#
-#					SOM grouped-clustering of sub-populations					#
+#		SOM grouped-clustering of sub-populations			#
 #-------------------------------------------------------------------------------#
 
 predSP.g <- function(sce, lbls1) {
@@ -237,12 +237,12 @@ predSP.g <- function(sce, lbls1) {
 
 
 #-------------------------------------------------------------------------------#
-#			Feature-selection per cell-type SOM sub-type clustering				#
+#	Feature-selection per cell-type SOM sub-type clustering			#
 #-------------------------------------------------------------------------------#
 
 predSP.fs <- function(sce, lbls1) {
 
-	####					Using PER CELL features. 						 ####
+	####	Using PER CELL features. 				 ####
 
 	pops2Clust2 <- list(
 		CD8.EMRA = list( 
@@ -271,7 +271,7 @@ predSP.fs <- function(sce, lbls1) {
 			)
 	)
 
-	####				Run SOM on defined cells & probes					 ####
+	####	Run SOM on defined cells & probes			 ####
 
 	purity = 0.6 # min fraction of same-type cells in a SOM cluster
 
@@ -326,13 +326,13 @@ predSP.fs <- function(sce, lbls1) {
 
 
 #-------------------------------------------------------------------------------#
-#					ROI & feature-selected SOM sub-type clustering				#
+#		ROI & feature-selected SOM sub-type clustering			#
 #-------------------------------------------------------------------------------#
 
 # Use training set to define a Region Of Interest (plausible range) per probe.
 predSP.ROI <- function(sce, lbls1) {
 
-	####		Define per cell features. Per cell ROIs are added below.	 ####
+	####	Define per cell features. Per cell ROIs are added below. ####
 	
 	pops2Clust3 <- list(
 		B.naive = list(
@@ -355,7 +355,7 @@ predSP.ROI <- function(sce, lbls1) {
 			)
 	)
 
-	#### 			Define ROIs within each of the above pops				 ####
+	#### 	Define ROIs within each of the above pops		 ####
 
 	mat = assay(sce, "exprs")[c(IgD, CD27), ]
 
@@ -378,7 +378,7 @@ predSP.ROI <- function(sce, lbls1) {
 	pops2Clust3[["B.pre"]]$ROI <- ROI.Bpre
 	pops2Clust3[["B.post"]]$ROI <- ROI.Bpost
 
-	####					Run SOM on defined cells & ROI					 ####
+	####		Run SOM on defined cells & ROI			 ####
 
 	purity = 0.6 # min fraction of same-type cells in a SOM cluster
 
@@ -434,11 +434,11 @@ predSP.ROI <- function(sce, lbls1) {
 
 
 #-------------------------------------------------------------------------------#
-#								Post-processing									#
+#			Post-processing						#
 #-------------------------------------------------------------------------------#
 
-####			 FlowJo T subset gates are rectangular						 ####
-####			 Get rectangular SOM bounds for subTs.						 ####
+####	 FlowJo T subset gates are rectangular				 ####
+####	Get rectangular SOM bounds for subTs.				 ####
 
 getThreshT <- function(sceQ) {
 
@@ -584,7 +584,7 @@ getThreshT <- function(sceQ) {
 }
 
 
-####				Post-process CD4/CD8 subset predictions					 ####
+####	Post-process CD4/CD8 subset predictions			 ####
 
 refinePreds.subT <- function(sceQ) {
 
@@ -658,7 +658,7 @@ refinePreds.subT <- function(sceQ) {
 } # NB. no return value. Global lblTbl update.
  
 
-####	Use SOM clusters to set rectangular B cell subset probe thresholds	 ####
+#### Use SOM clusters to set rectangular B cell subset probe thresholds	 ####
 
 getThreshB <- function(sceQ) {
 
@@ -703,7 +703,7 @@ getThreshB <- function(sceQ) {
 }
 
 
-####	 Convert B cell subset SOMs to rectangular gates					 ####
+####	 Convert B cell subset SOMs to rectangular gates	 ####
 
 refinePreds.subB <- function(sceQ) {
 
@@ -747,7 +747,7 @@ refinePreds.subB <- function(sceQ) {
 } # Note lblTbl is revised globally with "<<-"
 
 
-####				Post-process eosinophil/basophil predictions			 ####
+####	Post-process eosinophil/basophil predictions	 ####
 
 # Get cells expressing high levels of 'probe'
 getHi <- function(probe, thresh, fracTot = TRUE) {
@@ -792,7 +792,7 @@ refinePreds.EosBaso <- function(sceQ) {
 }
 
 
-####						Post-process pDC predictions					 ####
+####	Post-process pDC predictions				 ####
 
 refinePreds.DCs <- function(sceQ) {
 
@@ -829,7 +829,7 @@ refinePreds.DCs <- function(sceQ) {
 } # Note lblTbl is revised globally with "<<-"
 
 
-####						Post-process plasmablast predictions			 ####
+####		Post-process plasmablast predictions		 ####
 
 refinePreds.Plasmablasts <- function(sceQ) {
 
@@ -852,7 +852,7 @@ refinePreds.Plasmablasts <- function(sceQ) {
 
 
 #-------------------------------------------------------------------------------#
-#				Select prediction method per cell type, merge.					#
+#		Select prediction method per cell type, merge.			#
 #-------------------------------------------------------------------------------#
 
 labelQueryCells <- function() {
@@ -883,7 +883,7 @@ labelQueryCells <- function() {
 
 
 #-------------------------------------------------------------------------------#
-#			 Make correlation plots for SELECTED predictions 					#
+#		 Make correlation plots for SELECTED predictions 		#
 #-------------------------------------------------------------------------------#
 
 pltPreds <- function(sceL, allLabels, pops) {
@@ -937,7 +937,7 @@ pltPreds <- function(sceL, allLabels, pops) {
 
 
 #-------------------------------------------------------------------------------#
-#			 Make precision-recall plots for SELECTED predictions 				#
+#		 Make precision-recall plots for SELECTED predictions 		#
 #-------------------------------------------------------------------------------#
 
 pltStats <- function(sceL, allLabels, pops2Plt) {
@@ -952,7 +952,7 @@ pltStats <- function(sceL, allLabels, pops2Plt) {
 			
 			resTbl <- table(flo = colData(sceL[[qSample]])[shared, i], 
 							pred = allLabels[[qSample]][shared, 
-											 paste0("lbl.", i)])
+								paste0("lbl.", i)])
 			resTbl <- as.data.frame(resTbl)
 			
 			TP <- resTbl$Freq[resTbl$flo == TRUE &  resTbl$pred == TRUE]
@@ -997,7 +997,7 @@ pltStats <- function(sceL, allLabels, pops2Plt) {
 
 
 #-------------------------------------------------------------------------------#
-#			 Make precision-recall plots for LOO predictions 					#
+#		 Make precision-recall plots for LOO predictions 		#
 #-------------------------------------------------------------------------------#
 
 pltStatsLOO <- function(allSCE, allLabels, pops2Plt) {
@@ -1012,7 +1012,7 @@ pltStatsLOO <- function(allSCE, allLabels, pops2Plt) {
 		for (i in pops2Plt) {
 			resTbl <- table(flo = colData(sceQ)[ , i], 
 							pred = allLabels[[qSample]][ , 
-											 paste0("lbl.", i)])
+								paste0("lbl.", i)])
 			resTbl <- as.data.frame(resTbl)
 			
 			TP <- resTbl$Freq[resTbl$flo == TRUE &  resTbl$pred == TRUE]
