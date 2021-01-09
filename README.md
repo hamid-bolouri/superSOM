@@ -3,7 +3,7 @@
 
 ### Overview
 
-The scripts in this repository use various R and Bioconductor packages (most notably `flowSOM', `CATALYST`, and most of the Bioc flow libraries!) to enable automated gating of raw mass cytometery (CyTOF) FCS files. They were developed specifcally for whole-blood CyTOF immune profiling and have not been tested on other sample types.The overalll aproach is summarized in the figure below:
+The scripts in this repository use various R and Bioconductor packages (most notably `flowSOM`, `CATALYST`, and most of the Bioc flow libraries!) to enable automated gating of raw mass cytometery (CyTOF) FCS files. They were developed specifcally for whole-blood CyTOF immune profiling and have not been tested on other sample types.The overalll aproach is summarized in the figure below:
 
 Briefly, a query (ungated) sample is SOM-clustered with N manually gated and labeled samples. In each SOM cluster with > P% cells of the same label, unlabeled cells are given the same label as the majority label. The number of training samples (N) and the cluster purity thrshold will vary depending on the data characteristics. In our data, we find 15 < N < 20 and 0.5 < P < 0.8 work well.
 
@@ -14,48 +14,80 @@ superSOM requires the following packages.
 For `cleanUP` gating:
 
 library(SingleCellExperiment)
+
 library(openCyto)
+
 library(flowClust)
+
 library(data.table)
+
 library(flowCore)
+
 library(flowWorkspace)
+
 library(ggcyto)
+
 library(CytoML)
+
 library(flowDensity)
+
 library(tidyverse)
+
 library(destiny)
+
 library(scales)	
+
 library(mclust)
+
 library(MASS)
+
 library(IDPmisc)
+
 library(Hmisc)
 
 For supervised SOME clustering:
 
 library(SingleCellExperiment)
+
 library(flowCore)
+
 library(flowWorkspace)
+
 library(ggcyto)
+
 library(CytoML)
+
 library(FlowSOM)
+
 library(CATALYST)
+
 library(mclust)
+
 library(MASS)
+
 library(batchelor)
+
 library(scMerge)
+
 library(scater)
+
 library(cowplot)
+
 library(readxl)
+
 library(reshape2)
+
 library(tidyverse)
 
 library(BiocParallel) 
 
-For analysis:
+For downstream analysis:
+
 library(Hmisc)
+
 library(pheatmap)
 
-The current implementation of superSOM has not been optimized for speed or memory use. We typically use `MulticoreParam(workers = 16)` on a Unix platform with >64GB of RAM.
+The current implementation of superSOM has not been optimized for speed or memory use. We typically use `MulticoreParam(workers = 16)` on a Unix platform with > 64 GB of RAM.
 
 ### Automated 'clean up' gating
 
