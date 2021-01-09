@@ -13,10 +13,9 @@ superSOM requires the following packages.
 
 For `cleanUP` gating:
 
-```library(SingleCellExperiment)
-
+```
+library(SingleCellExperiment)
 library(openCyto)
-
 library(flowClust)
 
 library(data.table)
@@ -43,7 +42,9 @@ library(MASS)
 
 library(IDPmisc)
 
-library(Hmisc)```
+library(Hmisc)
+
+```
 
 For supervised SOME clustering:
 
@@ -86,6 +87,7 @@ For downstream analysis:
 library(Hmisc)
 
 library(pheatmap)
+```
 
 The current implementation of superSOM has not been optimized for speed or memory use. We typically use `MulticoreParam(workers = 16)` on a Unix platform with > 64 GB of RAM.
 
