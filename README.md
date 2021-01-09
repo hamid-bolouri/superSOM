@@ -13,7 +13,7 @@ superSOM requires the following packages.
 
 For `cleanUP` gating:
 
-`library(SingleCellExperiment)
+```library(SingleCellExperiment)
 
 library(openCyto)
 
@@ -43,7 +43,7 @@ library(MASS)
 
 library(IDPmisc)
 
-library(Hmisc)`
+library(Hmisc)```
 
 For supervised SOME clustering:
 
