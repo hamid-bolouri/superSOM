@@ -92,9 +92,11 @@ After superSOM has perfomred all the different types of clustering/labeling desc
 
 ### Post-processing
 
-After completion of SOM-clustering and label transfer, superSOM performs a post-processing step in which we adjust the boundaries of the clustering based gates to more closely resemble those defined by rectangular gates in FlowJo, as in the example below:
+After completion of SOM-clustering and label transfer, superSOM performs a post-processing step in which we adjust the boundaries of the clustering based gates to more closely resemble those defined by rectangle/polygon gates in FlowJo, as in the example below:
 
 ![postProcessing](https://user-images.githubusercontent.com/46689973/104108928-976fac80-527d-11eb-8fbc-3c0a081beb8a.png)
+
+This step is provided to facilitate 1:1 comparisons of FlowJo and superSOM gates.
 
 ### How to use superSOM
 
