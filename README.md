@@ -95,7 +95,7 @@ The superSOM pipeline has 3 parts. `CleanUP' gating takes in raw FCA files, perf
 
 ![cleanUPGating](https://user-images.githubusercontent.com/46689973/104108847-17e1dd80-527d-11eb-990b-7ba650d1bdf3.png)
 
-Since the results of clean up will affect downstream prediction accuracy, it is worth optimizing this step fpr each use case. In genertal, we find clean up identifies CD45+ singlets with > 90% Precisio  and Recall, as in the example figure below. 
+Since the results of clean up will affect downstream prediction accuracy, it is worth optimizing this step fpr each use case. In genertal, we find clean up identifies CD45+ singlets with > 90% Precision  and Recall, as in the example figure below. 
 
 ![cleanUp_accuracy](https://user-images.githubusercontent.com/46689973/104108903-714a0c80-527d-11eb-8f30-b3f3ec241565.png)
 
