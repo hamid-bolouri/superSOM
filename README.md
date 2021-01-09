@@ -1,9 +1,61 @@
 # superSOM
 ## CyTOF sample gating using supervised Self Organizing Maps
 
-The scripts in this repository use various R and Bioconductor packages (most notably `flowSOM' and `CATALYST`) to enable automated gating of raw mass cytometery (CyTOF) FCS files. They were developed specifcally for whole-blood CyTOF immune profiling and have not been tested on other sample types.The overalll aproach is summarized in the figure below:
+### Overview
+
+The scripts in this repository use various R and Bioconductor packages (most notably `flowSOM', `CATALYST`, and most of the Bioc flow libraries!) to enable automated gating of raw mass cytometery (CyTOF) FCS files. They were developed specifcally for whole-blood CyTOF immune profiling and have not been tested on other sample types.The overalll aproach is summarized in the figure below:
 
 Briefly, a query (ungated) sample is SOM-clustered with N manually gated and labeled samples. In each SOM cluster with > P% cells of the same label, unlabeled cells are given the same label as the majority label. The number of training samples (N) and the cluster purity thrshold will vary depending on the data characteristics. In our data, we find 15 < N < 20 and 0.5 < P < 0.8 work well.
+
+### Pre-requisites
+
+superSOM requires the following packages. 
+
+For `cleanUP` gating:
+
+library(SingleCellExperiment)
+library(openCyto)
+library(flowClust)
+library(data.table)
+library(flowCore)
+library(flowWorkspace)
+library(ggcyto)
+library(CytoML)
+library(flowDensity)
+library(tidyverse)
+library(destiny)
+library(scales)	
+library(mclust)
+library(MASS)
+library(IDPmisc)
+library(Hmisc)
+
+For supervised SOME clustering:
+
+library(SingleCellExperiment)
+library(flowCore)
+library(flowWorkspace)
+library(ggcyto)
+library(CytoML)
+library(FlowSOM)
+library(CATALYST)
+library(mclust)
+library(MASS)
+library(batchelor)
+library(scMerge)
+library(scater)
+library(cowplot)
+library(readxl)
+library(reshape2)
+library(tidyverse)
+
+library(BiocParallel) 
+
+For analysis:
+library(Hmisc)
+library(pheatmap)
+
+The current implementation of superSOM has not been optimized for speed or memory use. We typically use `MulticoreParam(workers = 16)` on a Unix platform with >64GB of RAM.
 
 ### Automated 'clean up' gating
 
@@ -23,6 +75,18 @@ To label the 9 major (mutually-exclusive) immune populations, we simply cluster 
 
 ![purity_profiles](https://user-images.githubusercontent.com/46689973/104108919-8a52bd80-527d-11eb-8605-b72548a5417f.png)
 
+In addition to using all probes for clustering, superSOM also clusters the major population using the specific sets of features that define each population, as specified in the gating hierarchy. Example selected features are given below:
+
+![strategy](https://user-images.githubusercontent.com/46689973/104108921-8c1c8100-527d-11eb-80e4-19665af258e3.png)
+
+To gate/label sub-populations of cels, superSOM simply repeats the above procedure using the newly-labeled parent cell populations for the query sample(s) and feature-sets defined by the gating hierarchy. For cells defined by quadrant gates, we also use the collection of all gate boundaries in the training data to define `Regions of Interest` to define the paretn cell population more tightly, as illustrated in the example below:
+
 ![ROIs](https://user-images.githubusercontent.com/46689973/104108926-92126200-527d-11eb-92ab-5be7293bcf31.png)
+
+After superSOM has perfomred all the different typers of clustering/labeling described above, the use can select the particular combination of inputs and parameters that lead to the best (application-specific) precision and recall values.
+
+### Post-processing
+
+After completion of SOM-clustering and label transfer, superSOM performs a post-processing step in which we adjust the boundaries of the clustering based gates to more closely resemble those defined by rectangular gates in FlowJo, as in the example below:
 
 ![postProcessing](https://user-images.githubusercontent.com/46689973/104108928-976fac80-527d-11eb-8fbc-3c0a081beb8a.png)
