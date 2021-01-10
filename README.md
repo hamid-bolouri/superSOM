@@ -100,6 +100,6 @@ This step is provided to facilitate 1:1 comparisons of FlowJo and superSOM gates
 
 ### How to use superSOM
 
-superSOM describes an approach to automated gating developed for a particular use-case. It is not a general-purpose R/Bioc package. The code in this repository is intended as an example implementation of the underlying idea and can be used as a strating point for future applications.
+superSOM describes an approach to automated gating developed for a particular use-case. It is not a general-purpose R/Bioc package. The code in this repository is intended as an example implementation of the underlying idea and can be used as a starting point for future applications.
 
 
